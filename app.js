@@ -160,6 +160,9 @@ router.get(
   usersController.redirectView
 ); // 로그아웃을 위한 라우트 추가
 
+
+
+
 /**
  * Users
  */
@@ -195,13 +198,33 @@ router.delete(
  * =====================================================================
  */
 // 1. index 라우트 생성 (모든 레코드 보기) = GET /discussions,                index 액션, index 뷰
+router.get("/discussions", discussionsController.index, discussionsController.indexView);
 // 2. 생성 폼을 보기 위한 요청 처리        = GET /discussions/new,            new 액션
+router.get("/discussions/new", discussionsController.new);
 // 3. 생성 데이터의 처리와 결과            = POST /discussions/create,        create 액션, redirectView 뷰
+router.post(
+  "/discussions/create",
+  discussionsController.create,
+  discussionsController.redirectView
+);
 // 4. show를 처리하기 위한 라우트          = GET /discussions/:id,            show 액션, showView 뷰
-// 5. edit를 처리하기 위한 라우트          = GET /discussions/:id/edit,       edit 액션
-// 6. 편집 데이터의 처리와 결과            = PUT /discussions/:id/update,     update 액션, redirectView 뷰
-// 7. 삭제를 처리하기 위한 라우트          = DELETE /discussions/:id/delete,  delete 액션, redirectView 뷰
+router.get("/discussions/:id", discussionsController.show, discussionsController.showView);
 
+// 5. edit를 처리하기 위한 라우트          = GET /discussions/:id/edit,       edit 액션
+router.get("/discussions/:id/edit", discussionsController.edit);
+
+// 6. 편집 데이터의 처리와 결과            = PUT /discussions/:id/update,     update 액션, redirectView 뷰
+router.put(
+  "/discussions/:id/update",
+  discussionsController.update,
+  discussionsController.redirectView
+);
+// 7. 삭제를 처리하기 위한 라우트          = DELETE /discussions/:id/delete,  delete 액션, redirectView 뷰
+router.delete(
+  "/discussions/:id/delete",
+  discussionsController.delete,
+  discussionsController.redirectView
+);
 /**
  * Comments
  */
